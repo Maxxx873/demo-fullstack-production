@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS users cascade;
+CREATE TABLE IF NOT EXISTS users(
+    id INT NOT NULL AUTO_INCREMENT,
+    login VARCHAR(100) NOT NULL UNIQUE,
+    pswd VARCHAR(100),
+    PRIMARY KEY (id)
+);
+insert into users values(1,'user1', '24C9E15E52AFC47C225B757E7BEE1F9D');
+insert into users values(2,'user2', '7E58D63B60197CEB55A1C487989A3720');
+insert into users values(3,'user3', '92877AF70A45FD6A2ED7FE81E1236B78');

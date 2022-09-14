@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  config:
+    import: optional:.env[.properties]
+    datasource:
+      url: jdbc:h2:mem:testdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password: password
+      jpa.database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    hibernate.ddl-auto: update
+  jackson:
+    default-property-inclusion: NON_NULL
+    visibility.field: any
+    visibility.getter: none
+    visibility.setter: none
+    visibility.is-getter: none
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    url: /api-docs.yml
+
+apiKey: ${API_KEY}
