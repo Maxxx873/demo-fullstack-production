@@ -29,10 +29,3 @@ This command results in three APK files:
 [project]/build/app/outputs/apk/release/app-armeabi-v7a-release.apk
 [project]/build/app/outputs/apk/release/app-arm64-v8a-release.apk
 [project]/build/app/outputs/apk/release/app-x86_64-release.apkf
-
-## Docker
-Build the Docker image
-docker build . -t flutter_docker
-
-Run the image container
-docker run -d -p 8080:5000 --name flutter_docker flutter_docker
