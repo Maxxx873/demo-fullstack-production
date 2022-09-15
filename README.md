@@ -13,7 +13,7 @@ This project is built and deployed on Heroku as a full stack for demonstration p
 
 ## Mock server API
 
-[Demo API](hhttps://mock-production-server.herokuapp.com/swagger-ui/index.html)
+[Demo API](https://mock-production-server.herokuapp.com/swagger-ui/index.html)
 
 ## Flutter client
 
