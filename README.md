@@ -1,4 +1,4 @@
-# <div align="center"> Demo fullstack project </div>
+# Demo fullstack project
 
 ![Spring boot](https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot)
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
