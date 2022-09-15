@@ -35,7 +35,6 @@ public class ParametersMapperImpl implements ParametersMapper {
         Map<String, String> inputParamsMap = Splitter.on(";").trimResults().withKeyValueSeparator("=").split(parametersString);
         Map<String, String> camelCaseParamsMap = new HashMap<>();
 
-        var f = Arrays.stream(Parameters.class.getDeclaredFields()).toList();
         var fieldNamesList = Arrays.stream(Parameters.class.getDeclaredFields()).toList().stream().map(Field::getName).toList();
         inputParamsMap.keySet().forEach(key -> {
             camelCaseParamsMap.put(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, key), inputParamsMap.get(key));

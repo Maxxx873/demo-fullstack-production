@@ -15,7 +15,7 @@ public interface ResultService {
      * @param param function parameters
      * @return RESULT
      */
-    RESULT getPdoUser(String param);
+    RESULT getOsoUser(String param);
 
     /**
      * Get user information

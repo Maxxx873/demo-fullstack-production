@@ -48,6 +48,7 @@ class _MyAppState extends State<UserApp> {
   final TextEditingController _controllerPassword = TextEditingController();
 
   Future<RESULT?>? _futureData;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -70,94 +71,118 @@ class _MyAppState extends State<UserApp> {
     );
   }
 
-  Column buildColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Center(
-            child: Container(
-              width: 200,
-              height: 80,
-              child: const Icon(
-                Icons.settings_applications_sharp,
-                color: Colors.black54,
-                size: 100,
+  Form buildColumn() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Container(
+                width: 200,
+                height: 80,
+                child: const Icon(
+                  Icons.settings_applications_sharp,
+                  color: Colors.black54,
+                  size: 100,
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-            alignment: Alignment.center,
+          Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                'Production software',
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 30),
+              )),
+          Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                'Sign in',
+                style: TextStyle(fontSize: 20),
+              )),
+          Container(
+            constraints: BoxConstraints(minWidth: 100, maxWidth: 800),
+            alignment: Alignment.centerRight,
             padding: const EdgeInsets.all(10),
-            child: const Text(
-              'Production software',
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 30),
-            )),
-        Container(
-            alignment: Alignment.center,
+            child: TextFormField(
+              controller: _controllerLogin,
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.person),
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your login',
+                  labelText: 'Login'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your login';
+                }
+                return null;
+              },
+            ),
+          ),
+          Container(
+            constraints: BoxConstraints(minWidth: 100, maxWidth: 800),
             padding: const EdgeInsets.all(10),
-            child: const Text(
-              'Sign in',
-              style: TextStyle(fontSize: 20),
-            )),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: TextFormField(
-            controller: _controllerLogin,
-            decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(10.0),
-                border: OutlineInputBorder(),
-                hintText: 'Enter your login',
-                labelText: 'Login'),
+            child: TextFormField(
+              obscureText: true,
+              controller: _controllerPassword,
+              decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.lock_open),
+                  contentPadding: EdgeInsets.all(10.0),
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter your password',
+                  labelText: 'Password'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter wour password';
+                }
+                return null;
+              },
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: TextFormField(
-            obscureText: true,
-            controller: _controllerPassword,
-            decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(10.0),
-                border: OutlineInputBorder(),
-                hintText: 'Enter your password',
-                labelText: 'Password'),
-          ),
-        ),
-        Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFFE50D43)),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+          Container(
+              constraints: BoxConstraints(minWidth: 100, maxWidth: 800),
+              height: 50,
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFFE50D43)),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
                   ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      setState(() {
+                        _futureData = createData(
+                            _controllerLogin.text, _controllerPassword.text);
+                      });
+                    }
+                  },
+                  child: const Text(
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20,
+                      ),
+                      'Login'),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _futureData = createData(
-                        _controllerLogin.text, _controllerPassword.text);
-                  });
-                },
-                child: const Text(
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20,
-                    ),
-                    'Login'),
-              ),
-            )),
-      ],
+              )),
+        ],
+      ),
     );
   }
 

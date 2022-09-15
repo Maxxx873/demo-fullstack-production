@@ -32,7 +32,7 @@ public class MockResultServiceImpl implements ResultService {
     }
 
     @Override
-    public RESULT getPdoUser(String param) {
+    public RESULT getOsoUser(String param) {
         log.info("Running GET_PDO_USER function with following parameters: {}", param);
 
         if (userRepository.findByUserAndPswd(parametersMapper.stringToParameters(param).getUser(), parametersMapper.stringToParameters(param).getPswd()).isPresent()) {

@@ -106,7 +106,8 @@ class _MyAppState extends State<ServerApp> {
         List<Widget> children;
         if (snapshot.hasData && snapshot.data?.EXITCODE == 0) {
           children = <Widget>[
-            Padding(
+            Container(
+              constraints: BoxConstraints(minWidth: 100, maxWidth: 1500),
               padding: const EdgeInsets.only(top: 16),
               child: Card(
                 elevation: 4.0,

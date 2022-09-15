@@ -24,7 +24,7 @@ public class ApiController implements ProductionServerApi {
                     return ResponseEntity.ok(resultService.echo());
                 }
                 case "GET_PDO_USER" -> {
-                    return ResponseEntity.ok(resultService.getPdoUser(PARAM));
+                    return ResponseEntity.ok(resultService.getOsoUser(PARAM));
                 }
                 case "GET_OSO_VYPUSK" -> {
                     return ResponseEntity.ok(resultService.getPdoVypusk(PARAM));
