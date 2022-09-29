@@ -22,6 +22,7 @@
         android:selectAllOnFocus="true"
         android:textColorHighlight="@color/brand"
         android:textColorLink="@color/brand"
+        android:drawableStart="@drawable/ic_baseline_account_circle_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -40,6 +41,7 @@
         android:selectAllOnFocus="true"
         android:textColorHighlight="@color/brand"
         android:textColorLink="@color/brand"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
