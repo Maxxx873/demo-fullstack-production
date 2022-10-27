@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: mock-production-server
+  description: 'Mock Production Server API'
+  version: 0.0.1
+tags:
+  - name: 'ProductionServer'
+    description: 'Production Server API'
+paths:
+  /:
+    get:
+      tags:
+        - 'ProductionServer'
+      security:
+        - ApiKeyAuth: []
+      operationId: getResponse
+      responses:
+        '200':
+          description: Get response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESULT'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/RESULT'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_RESULT'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ERROR_RESULT'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: string
+      summary: Get response
+      description: Get response
+      parameters:
+        - in: query
+          name: CMD
+          schema:
+            type: string
+            enum: [ "ECHO", "GET_PDO_USER", "GET_OSO_VYPUSK"]
+          description: Function name
+          required: true
+        - in: query
+          name: PARAM
+          schema:
+            type: string
+            properties:
+              PARAM:
+                type: object
+                $ref: '#/components/schemas/Parameters'
+          description: String of function parameters (user=user1;pswd=24C9E15E52AFC47C225B757E7BEE1F9D;id_lang=rus;YEAR=2021;MONTH=3;IZD=1200;page_size=1;Page=0)
+
+components:
+  schemas:
+    Parameters:
+      type: object
+      description: 'Function parameters'
+      properties:
+        user:
+          type: string
+          description: User login
+        pswd:
+          type: string
+          description: Hash sum of the password
+        id_lang:
+          type: string
+          description: Language ID
+        year:
+          type: string
+          description: Release year
+        month:
+          type: string
+          description: Release month
+        izd:
+          type: string
+          description: Product
+        page_size:
+          type: string
+          description: Page size
+        page:
+          type: string
+          description: Page
+
+    RESULT:
+      type: object
+      description: 'Server response as a result of the function execution'
+      properties:
+        EXITCODE:
+          type: integer
+          description: Function execution result code
+        EXITTEXT:
+          type: string
+          description: The text of the execution result
+        PAGE_SIZE:
+          type: integer
+          description: Page size
+        PAGE:
+          type: integer
+          description: Current page
+        RECORD_COUNT:
+          type: integer
+          description: The total number of entries
+        NUMBER_OF_PAGES:
+          type: integer
+          description: Number of pages
+        DATA:
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - $ref: '#/components/schemas/Products'
+
+    ERROR_RESULT:
+      type: object
+      description: 'Bad request'
+      properties:
+        EXITCODE:
+          type: integer
+          description: Function execution result code
+        EXITTEXT:
+          type: string
+          description: The text of the execution result
+
+    User:
+      type: object
+      description: 'User information'
+      properties:
+        ID:
+          type: string
+          description: User ID
+        ID_GUIDE_CEH:
+          type: string
+          description: ID of the user's department
+        LASTNAME:
+          type: string
+          description: User`s lastname
+        FIRSTNAME:
+          type: string
+          description: User`s firstname
+        SURNAME:
+          type: string
+          description: User`s surname
+        ID_GUIDE_CONCERN:
+          type: string
+          description: The user's enterprise ID
+
+    Products:
+      type: object
+      description: 'List of serial numbers and product models'
+      properties:
+        ITEM:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+
+    Product:
+      type: object
+      description: 'Serial number and product model'
+      properties:
+        SN:
+          type: string
+          description: The serial number for which the search was performed
+        SIGN:
+          type: string
+          description: Product designation
+        NAME:
+          type: string
+          description: Product name
+
+  securitySchemes:
+     ApiKeyAuth:
+       type: apiKey
+       description: API key to authorize requests
+       name: API_KEY
+       in: query

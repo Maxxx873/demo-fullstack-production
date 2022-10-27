@@ -1,0 +1,10 @@
+spring:
+  config:
+    import: optional:.env[.properties]
+
+baseUrl: ${BASE_URL}
+
+server:
+  port: ${PORT:8080}
+
+apiKey: ${API_KEY}
