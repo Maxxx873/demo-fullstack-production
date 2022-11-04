@@ -1,0 +1,6 @@
+baseUrl: http://localhost:8080/
+
+server:
+  port: 0
+
+apiKey: API_KEY
