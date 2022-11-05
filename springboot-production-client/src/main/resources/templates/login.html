@@ -20,7 +20,7 @@
                 <div class="col">
                     <div class="row">
                         <h1 class="text-center">Sign in</h1>
-                        <form th:action="@{/login}" class="login-form" method='POST'>
+                        <form th:action="@{/login}" id="login-form" class="login-form" method='POST'>
                             <div class="form-group p-1">
                                 <input type="text" class="form-control" name="username" placeholder="Login">
                             </div>
@@ -28,8 +28,11 @@
                                 <input type="password" name="password" class="form-control" placeholder="Password">
                             </div>
                             <div class="d-grid gap-2 p-1">
-                                <button class="btn btn-login btn-danger" type="submit">Login</button>
+                                <button id="login-button" class="btn btn-login btn-danger" type="submit">Login
+                                    <span hidden id="spinner" class="spinner-border spinner-border-sm" role="status"></span>
+                                </button>
                             </div>
+
                             <div class="text-danger" th:if="${param.error}">
                                 Invalid username or password.
                             </div>
@@ -40,11 +43,23 @@
         </div>
     </div>
 </div>
-
+<p id="demo"></p>
 <div class="container">
     <footer class="py-3 my-4 mt-auto fixed-bottom">
         <p class="text-center text-muted">Copyright © 2022</p>
     </footer>
 </div>
+
+<script>
+const form = document.getElementById("login-form");
+form.addEventListener('submit', (event) => {
+     let element = document.getElementById("spinner");
+     let hidden = element.getAttribute("hidden");
+     if (hidden = true) {
+        element.removeAttribute("hidden");
+     }
+});
+</script>
+
 </body>
 </html>

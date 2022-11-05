@@ -20,10 +20,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RESULT_JSON'
+                $ref: '#/components/schemas/RESULT'
             application/xml:
               schema:
-                $ref: '#/components/schemas/RESULT_XML'
+                $ref: '#/components/schemas/RESULT'
         '400':
           description: Bad request
           content:
@@ -61,7 +61,6 @@ paths:
 
 components:
   schemas:
-
     Parameters:
       type: object
       description: 'Function parameters'
@@ -90,34 +89,11 @@ components:
         page:
           type: string
           description: Page
-    RESULT_XML:
-      type: object
-      description: 'Server response as a result of the function execution'
-      properties:
-        EXITCODE:
-          type: integer
-          description: Function execution result code
-        EXITTEXT:
+        answer:
           type: string
-          description: The text of the execution result
-        PAGE_SIZE:
-          type: integer
-          description: Page size
-        PAGE:
-          type: integer
-          description: Current page
-        RECORD_COUNT:
-          type: integer
-          description: The total number of entries
-        NUMBER_OF_PAGES:
-          type: integer
-          description: Number of pages
-        DATA:
-          allOf:
-            - $ref: '#/components/schemas/User'
-            - $ref: '#/components/schemas/Products'
+          description: Server response format (Json)
 
-    RESULT_JSON:
+    RESULT:
       type: object
       description: 'Server response as a result of the function execution'
       properties:

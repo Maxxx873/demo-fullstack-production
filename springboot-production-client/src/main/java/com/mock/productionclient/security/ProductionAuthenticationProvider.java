@@ -9,8 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -32,10 +30,12 @@ public class ProductionAuthenticationProvider implements AuthenticationProvider 
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString().toUpperCase();
         var result = apiClient.getUser(login, md5);
+        var userName = String.format("%s %s %s",
+                result.getData().getFirstname(), result.getData().getLastname(), result.getData().getSurname());
         if (result.getExitCode().equals(0) && result.getExitText().equals("Ok")) {
             final List<GrantedAuthority> grantedAuths = new ArrayList<>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-            final UserDetails principal = new User(login, password, grantedAuths);
+            final ProductionUserDetails principal = new ProductionUserDetails(grantedAuths, password, login, userName, md5);
             return new UsernamePasswordAuthenticationToken(principal, password, grantedAuths);
         } else {
             return null;
