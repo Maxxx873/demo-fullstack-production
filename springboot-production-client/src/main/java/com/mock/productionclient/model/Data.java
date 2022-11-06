@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,4 +39,8 @@ public class Data {
     @JsonProperty("ID_GUIDE_CONCERN")
     @JacksonXmlProperty(localName = "ID_GUIDE_CONCERN")
     private String idGuideConcern;
+
+    @JsonProperty("ITEM")
+    @JacksonXmlProperty(localName = "ITEM")
+    private List<Product> products;
 }

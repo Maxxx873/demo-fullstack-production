@@ -2,6 +2,7 @@ package com.mock.productionclient.security;
 
 import com.google.common.hash.Hashing;
 import com.mock.productionclient.client.ProductionApiClient;
+import com.mock.productionclient.model.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,9 +31,9 @@ public class ProductionAuthenticationProvider implements AuthenticationProvider 
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString().toUpperCase();
         var result = apiClient.getUser(login, md5);
-        var userName = String.format("%s %s %s",
-                result.getData().getFirstname(), result.getData().getLastname(), result.getData().getSurname());
-        if (result.getExitCode().equals(0) && result.getExitText().equals("Ok")) {
+        if (isCredentialsValid(result)) {
+            var userName = String.format("%s %s %s",
+                    result.getData().getFirstname(), result.getData().getLastname(), result.getData().getSurname());
             final List<GrantedAuthority> grantedAuths = new ArrayList<>();
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
             final ProductionUserDetails principal = new ProductionUserDetails(grantedAuths, password, login, userName, md5);
@@ -45,5 +46,11 @@ public class ProductionAuthenticationProvider implements AuthenticationProvider 
     @Override
     public boolean supports(final Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+
+    private boolean isCredentialsValid(Result result) {
+        return result.getExitCode().equals(0) && result.getExitText().equals("Ok") &&
+                result.getData().getFirstname() != null && result.getData().getLastname() != null &&
+                result.getData().getSurname() != null;
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import static com.mock.productionclient.model.ServerFunctionName.GET_PDO_USER;
+
 @Component
 @RequiredArgsConstructor
 public class ProductionApiClient {
@@ -37,7 +39,7 @@ public class ProductionApiClient {
                 .uri(uriBuilder -> uriBuilder
                         .path("/")
                         .queryParam("API_KEY", apiKey)
-                        .queryParam("CMD", "GET_PDO_USER")
+                        .queryParam("CMD", GET_PDO_USER)
                         .queryParam("PARAM", String.format("user=%s;pswd=%s", login, password))
                         .build())
                 .retrieve()

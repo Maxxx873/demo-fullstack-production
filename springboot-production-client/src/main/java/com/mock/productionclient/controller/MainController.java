@@ -43,6 +43,12 @@ public class MainController {
         return "server";
     }
 
+    @GetMapping("/products")
+    public String viewProductsPage(Model model) {
+        model.addAttribute("products", apiClient.getResult(GET_OSO_VYPUSK, "YEAR=2021;MONTH=3;IZD=1200").getData().getProducts());
+        return "products";
+    }
+
     @GetMapping("/user")
     public String viewUserPage(Model model) {
         var userDetails = (ProductionUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
