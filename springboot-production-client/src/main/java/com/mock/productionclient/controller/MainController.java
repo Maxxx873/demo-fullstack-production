@@ -39,13 +39,13 @@ public class MainController {
 
     @GetMapping("/server")
     public String viewServerPage(Model model) {
-        model.addAttribute("result", apiClient.getResult(ECHO, ""));
+        model.addAttribute("result", apiClient.getResult(ECHO, "answer=json"));
         return "server";
     }
 
     @GetMapping("/products")
     public String viewProductsPage(Model model) {
-        model.addAttribute("products", apiClient.getResult(GET_OSO_VYPUSK, "YEAR=2021;MONTH=3;IZD=1200").getData().getProducts());
+        model.addAttribute("products", apiClient.getResult(GET_OSO_VYPUSK, "IZD=1200;answer=json").getData().getProducts());
         return "products";
     }
 

@@ -40,7 +40,7 @@ public class ProductionApiClient {
                         .path("/")
                         .queryParam("API_KEY", apiKey)
                         .queryParam("CMD", GET_PDO_USER)
-                        .queryParam("PARAM", String.format("user=%s;pswd=%s", login, password))
+                        .queryParam("PARAM", String.format("user=%s;pswd=%s;answer=json", login, password))
                         .build())
                 .retrieve()
                 .bodyToMono(String.class)

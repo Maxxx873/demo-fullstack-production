@@ -24,3 +24,6 @@ This project is built and deployed on Heroku as a full stack for demonstration p
 
 ## Spring boot client
 
+[Spring boot client demo](https://mock-production-client.herokuapp.com/)
+
+

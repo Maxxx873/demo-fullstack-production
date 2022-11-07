@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Production planning software login page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../static/css/bootstrap.css"
           th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" href="../static/css/styles.css"
           th:href="@{/css/styles.css}">
 </head>
 <body>
-
 <div class="container login-container">
     <div class="container d-flex justify-content-center">
         <div class="card border-0 shadow rounded-3 overflow-hidden">
@@ -26,6 +26,19 @@
                             </div>
                             <div class="form-group p-1">
                                 <input type="password" name="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="p-2">
+                                <a class="fs-5 link-dark text-decoration-none" data-bs-toggle="collapse"
+                                   href="#collapseForgotPassword" role="button" aria-expanded="false"
+                                   aria-controls="collapseForgotPassword">
+                                    Forgot password?
+                                </a>
+                                <div class="collapse" id="collapseForgotPassword">
+                                    <div class="card card-body">
+                                        <i class="bi-telephone-fill"></i>
+                                        Please call support
+                                    </div>
+                                </div>
                             </div>
                             <div class="d-grid gap-2 p-1">
                                 <button id="login-button" class="btn btn-login btn-danger" type="submit">Login
@@ -44,7 +57,7 @@
         </div>
     </div>
 </div>
-<p id="demo"></p>
+
 <div class="container">
     <footer class="py-3 my-4 mt-auto fixed-bottom">
         <p class="text-center text-muted">Copyright © 2022</p>
@@ -62,6 +75,8 @@ form.addEventListener('submit', (event) => {
 });
 
 </script>
+<script type="text/javascript " src="../static/js/bootstrap.bundle.min.js"
+        th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>

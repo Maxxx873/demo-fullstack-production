@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Layouts</title>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="../static/css/bootstrap.css"
+      th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" href="../static/css/styles.css"
+      th:href="@{/css/styles.css}">
 <body>
 
 <div th:fragment="header">
@@ -17,7 +22,7 @@
 <div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-4">
-            <a class="navbar-brand" href="index.html" th:href="@{/index}">Production planning</a>
+            <a class="navbar-brand" href="index.html" th:href="@{/index}">Production client</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
@@ -29,8 +34,32 @@
                     <li class="nav-item"><a class="nav-link"
                                             href="https://mock-production-server.herokuapp.com/swagger-ui/index.html">API</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://demo-production-client.herokuapp.com/">Flutter
+                        APP</a></li>
                 </ul>
+                <div id="loggedUser" class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser"
+                       data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle" style="color:white;font-size:20px"></i></a>
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
+                        <li>
+                            <div class="dropdown-item text-wrap" sec:authorize="isAuthenticated()">
+                                <p>You logged as:</p>
+                                <strong th:text="${#authentication.name}"></strong>
+                            </div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form method="post" th:action="@{/logout}">
+                                <i class="bi bi-arrow-left-circle-fill px-2"></i><input type="submit"
+                                                                                        class="btn px-1 py-0"
+                                                                                        value="Logout"/>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,11 +70,14 @@
     <footer class="bg-dark py-4 mt-auto fixed-bottom">
         <div class="container px-5">
             <div class="row align-items-center justify-content-center flex-column flex-sm-row">
-                <div class="col-auto"><div class="small m-0 text-white">Copyright © 2022</div></div>
+                <div class="col-auto">
+                    <div class="small m-0 text-white">Copyright © 2022</div>
+                </div>
             </div>
         </div>
     </footer>
 </div>
-
+<script type="text/javascript " src="../static/js/bootstrap.bundle.min.js"
+        th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
